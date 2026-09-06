@@ -1,0 +1,34 @@
+﻿#pragma once
+
+#include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
+#include "UObject/Object.h"
+#include "ItemInstance.generated.h"
+
+class UInventoryItemFragment;
+class UItemDefinition;
+
+UCLASS(BlueprintType)
+class INVENTORYSYSTEM_API UItemInstance : public UObject
+{
+	GENERATED_BODY()
+	
+public:
+	UPROPERTY(BlueprintReadOnly)
+	TSubclassOf<UItemDefinition> ItemDefinition;
+
+	UPROPERTY(BlueprintReadOnly)
+	TMap<FGameplayTag, float> StatsMap;
+	
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Item Stats", meta = (Categories = "Item Stat"))
+	float GetStatValue(FGameplayTag StatTag);
+	
+	UFUNCTION(BlueprintCallable, Category = "Item Stats", meta = (Categories = "Item Stat"))
+	void SetStatValue(FGameplayTag StatTag, float StatValue);
+	
+	UFUNCTION(BlueprintCallable, Category = "Item Instance", meta = (AutoCreateRefTerm = "InitalStats"))
+	void Initialize(TSubclassOf<UItemDefinition> ItemDef, const TMap<FGameplayTag, float>& InitalStats);
+	
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (DeterminesOutputType = "FragmentClass"))
+	const UInventoryItemFragment* FindFragmentByClass(const TSubclassOf<UInventoryItemFragment> FragmentClass);
+};
