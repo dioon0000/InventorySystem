@@ -12,7 +12,7 @@ class INVENTORYSYSTEM_API UInventoryItemFragment_Usable : public UInventoryItemF
 public:
 	
 	UFUNCTION(BlueprintCallable)
-	bool Use(AActor* ItemOwner);
+	bool Use(AActor* ItemOwner, UItemInstance* ItemInstance);
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Options")
 	bool bConsumeOnUse = true;

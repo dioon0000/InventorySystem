@@ -11,5 +11,5 @@ class INVENTORYSYSTEM_API UItemAction : public UObject
 	
 public:
 	UFUNCTION(BlueprintImplementableEvent)
-	bool Execute(AActor* ItemOwner);
+	bool Execute(AActor* ItemOwner, UItemInstance* ItemInstance);
 };
